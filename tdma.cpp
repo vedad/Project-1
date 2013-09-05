@@ -6,45 +6,58 @@
 
 using namespace std;
 
-
 void doAlgorithm(double aVals, double bVals, double cVals, int N) {
 
-    double a [N-1];
+    double a [N];
     double b [N];
-    double c [N-1];
+    double c [N];
     double f [N];
     double v [N];
     double x [N];
 
-    fill_n(a, N-1, aVals);
+    fill_n(a, N, aVals);
     fill_n(b, N, bVals);
-    fill_n(c, N-1, cVals);
+    fill_n(c, N, cVals);
 
     a[0] = 0.0;
-    c[N-2] = 0.0;
+    c[N-1] = 0.0;
 
     double h = 1./(N+1);
 
-    /* Forward substitution */
-
-    for (int i=0; i <N; i++) {
+    for (int i=0; i < N; i++) {
 
         f[i] = h * h * (100 * exp(-10 * i * h));
 
     }
 
-    for (int i=0; i < N; i++) {
+    /* Forward substitution */
+
+    for (int i=0; i < (N-1); i++) {
 
         b[i+1] -= c[i] * a[i+1] / b[i];
         f[i+1] -= f[i] * a[i+1] / b[i];
 
     }
 
+    cout << "third to last f: " << f[N-3] << endl;
+    cout << "second to last f: " << f[N-2] << endl;
+    cout << "last f: " << f[N-1] << endl;
+    cout << "superlast f: " << f[N] << endl;
+
     /* Backward substitution */
 
     for (int i=(N-1); i >= 0; i--) {
 
-        v[i] = (f[i] - c[i] * v[i+1]) / b[i];
+        if (i == (N-1)) {
+
+            v[i] = f[i] / b[i];
+        }
+
+        else {
+
+            v[i] = (f[i] - c[i] * v[i+1]) / b[i];
+
+        }
 
     }
 
@@ -55,6 +68,7 @@ void doAlgorithm(double aVals, double bVals, double cVals, int N) {
 
         x[i] = i/(double)(N);
         outFile << setprecision(3) << x[i] << " " << v[i] << endl;
+        cout << v[i] << endl;
 
     }
 
