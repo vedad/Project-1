@@ -32,7 +32,7 @@ void doAlgorithm(double aVals, double bVals, double cVals, int N) {
 
     /* Forward substitution */
 
-    for (int i=0; i < (N-1); i++) {
+    for (int i=0; i < N; i++) {
 
         b[i+1] -= c[i] * a[i+1] / b[i];
         f[i+1] -= f[i] * a[i+1] / b[i];
@@ -46,11 +46,16 @@ void doAlgorithm(double aVals, double bVals, double cVals, int N) {
 
     /* Backward substitution */
 
-    for (int i=(N-1); i >= 0; i--) {
+    for (int i=N; i >= 0; i--) {
 
-        if (i == (N-1)) {
+        if (i == N) {
 
-            v[i] = f[i] / b[i];
+            v[i] = 0;
+        }
+
+        else if (i == 0) {
+
+            v[i] = 0;
         }
 
         else {
@@ -64,13 +69,17 @@ void doAlgorithm(double aVals, double bVals, double cVals, int N) {
     fstream outFile;
     outFile.open("linEqSolutionSet.txt", ios::out);
 
-    for (int i=0; i < N; i++) {
+    for (int i=0; i <= N; i++) {
 
         x[i] = i/(double)(N);
         outFile << setprecision(3) << x[i] << " " << v[i] << endl;
-        cout << v[i] << endl;
+        cout << v[i] << "      " << "index: " << i << endl;
 
     }
+
+    cout << "v-size: " << sizeof(v)/sizeof(*v) << endl;
+    cout << "x-size: " << sizeof(x)/sizeof(*x) << endl;
+
 
 //    outFile << endl;
     outFile.close();

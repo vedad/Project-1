@@ -11,7 +11,9 @@ import sys
 
 try:
     global _infile
-    _infile = sys.argv[1];
+    global _infile2
+    _infile = sys.argv[1]
+    _infile2 = sys.argv[2]
 except IndexError:
     print 'Please specify datafile to read.'
     print 'Usage: python %s datafile.dat' % sys.argv[0]
@@ -33,6 +35,18 @@ def read():
 
     infile.close()
 
+def read2():
+	infile2 = open(_infile2,'r')
+
+	global _z; _z = []
+
+	for line in infile2:
+		columns = line.split()
+		_z.append(float(columns[0]))
+
+	infile2.close()
+
+
 def plot():
     '''
     Plots data.
@@ -40,10 +54,13 @@ def plot():
     fig = plt.figure()
     ax = fig.add_subplot(111)
     ax.plot(_x,_y)
+    plt.hold('on')
+    ax.plot(_x,_z)
 
 if __name__ == '__main__':
     print 'Sucessfully started.'
     read()
+    read2()
     print 'File read.'
     plot()
 
