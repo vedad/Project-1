@@ -27,9 +27,14 @@ void doAlgorithm(double aVals, double bVals, double cVals, int N) {
 
     /* Forward substitution */
 
-    for (int i=0; i < N; i++) {
+    for (int i=0; i <N; i++) {
 
         f[i] = h * h * (100 * exp(-10 * i * h));
+
+    }
+
+    for (int i=0; i < N; i++) {
+
         b[i+1] -= c[i] * a[i+1] / b[i];
         f[i+1] -= f[i] * a[i+1] / b[i];
 
@@ -53,7 +58,7 @@ void doAlgorithm(double aVals, double bVals, double cVals, int N) {
 
     }
 
-    outFile << endl;
+//    outFile << endl;
     outFile.close();
 
 }
