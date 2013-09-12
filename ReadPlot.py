@@ -8,6 +8,7 @@ author: Kristoffer Braekken
 """
 from matplotlib import pyplot as plt
 import sys
+import numpy as np
 
 try:
     global _infile
@@ -33,18 +34,19 @@ def read():
         _x.append(float(columns[0]))
         _y.append(float(columns[1]))
 
+
     infile.close()
 
 def read2():
-	infile2 = open(_infile2,'r')
+    infile2 = open(_infile2,'r')
 
-	global _z; _z = []
+    global _z; _z = []
 
-	for line in infile2:
-		columns = line.split()
-		_z.append(float(columns[0]))
+    for line in infile2:
+        columns = line.split()
+        _z.append(float(columns[1]))
 
-	infile2.close()
+    infile2.close()
 
 
 def plot():
@@ -53,15 +55,16 @@ def plot():
     '''
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.plot(_x,_y)
+    ax.plot(_x,_y, label='Numerical')
     plt.hold('on')
-    ax.plot(_x,_z)
+    ax.plot(_x,_z, label='Analytical')
+    ax.legend()
 
 if __name__ == '__main__':
     print 'Sucessfully started.'
     read()
     read2()
-    print 'File read.'
+    print 'Files read.'
     plot()
 
     plt.show()

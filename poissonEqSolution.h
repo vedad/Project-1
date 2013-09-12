@@ -1,4 +1,4 @@
 #ifndef ANALYTICALSOLUTION_H
 #define ANALYTICALSOLUTION_H
-void analyticalSolution();
+void PoissonEqSolve(int);
 #endif // ANALYTICALSOLUTION_H
