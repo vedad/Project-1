@@ -2,13 +2,14 @@
 #include "poissonEqSolution.h"
 #include <cmath>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
 void PoissonEqSolve(int N) {
 
-    double x [N+2];
-    double u [N+2];
+    double *x = new double [N+2];
+    double *u = new double [N+2];
 
     fstream outFile;
     outFile.open("analyticalData.txt", ios::out);
@@ -22,7 +23,7 @@ void PoissonEqSolve(int N) {
 
         x[i] = i/(double)(N+1);
         u[i] = 1 - (1 - exp(-10)) * x[i] - exp(-10 * x[i]);
-        outFile << x[i] << " " << u[i] << endl;
+        outFile << setprecision(15) << x[i] << " " << u[i] << endl;
 
     }
 

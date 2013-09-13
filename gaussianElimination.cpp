@@ -8,12 +8,12 @@ using namespace std;
 
 void GESolve(double aVals, double bVals, double cVals, int N) {
 
-    double a [N+1];
-    double b [N+1];
-    double c [N+1];
-    double f [N+1];
-    double v [N+2];
-    double x [N+2];
+    double *a = new double[N+1];
+    double *b = new double[N+1];
+    double *c = new double[N+1];
+    double *f = new double[N+1];
+    double *v = new double[N+2];
+    double *x = new double[N+2];
 
     fill_n(a, N+1, aVals);
     fill_n(b, N+1, bVals);
@@ -59,7 +59,7 @@ void GESolve(double aVals, double bVals, double cVals, int N) {
     for (int i=0; i < N+2; i++) {
 
         x[i] = i/(double)(N+1);
-        outFile << x[i] << " " << v[i] << endl;
+        outFile << setprecision(15) << x[i] << " " << v[i] << endl;
 
     }
 
