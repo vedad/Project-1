@@ -6,13 +6,20 @@
 
 using namespace std;
 
+/*
+ *  The function makes N+1 discrete values for the solution
+ *  of the 1D Poisson equation, as a function of x.
+ *  The solutions are written to a file, for comparison with
+ *  the numerical approach.
+ */
+
 void PoissonEqSolve(int N) {
 
-    double *x = new double [N+2];
-    double *u = new double [N+2];
+    double *x = new double [N+2]; // x-values
+    double *u = new double [N+2]; // Solution array
 
     fstream outFile;
-    outFile.open("analyticalData.txt", ios::out);
+    outFile.open("analyticalDataN1000.txt", ios::out);
 
     for (int i=0; i < (N+2); i++) {
 
@@ -28,5 +35,9 @@ void PoissonEqSolve(int N) {
     }
 
     outFile.close();
+
+    // Delete arrays to free memory
+    delete [] x;
+    delete [] u;
 
 }
